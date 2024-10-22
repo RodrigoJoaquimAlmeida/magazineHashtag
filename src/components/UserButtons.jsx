@@ -5,18 +5,15 @@ import { faBagShopping, faUser } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 
 const UserButtons = () => {
+	const { toggleIsCartOpen, cartItems } = useContext(CartContext);
 	const [amountOfItems, setAmountOfItems] = useState(0);
-	const { setIsCartOpen, cartItems } = useContext(CartContext);
 
 	useEffect(() => {
 		setAmountOfItems(getAmountOfItemsInCart(cartItems));
 	}, [cartItems]);
 	return (
 		<div>
-			<button
-				className='px-2 relative'
-				onClick={() => setIsCartOpen(true)}
-			>
+			<button className='px-2 relative' onClick={toggleIsCartOpen}>
 				<FontAwesomeIcon icon={faBagShopping} />
 				{!!amountOfItems && (
 					<div
